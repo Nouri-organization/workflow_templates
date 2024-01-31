@@ -1,0 +1,117 @@
+name: Test Dependencies on Different Operating Systems
+
+on:
+  push:
+    branches:
+      - main
+    # paths:
+    #   - requirements.txt
+
+jobs:
+
+  Test_under_ubuntu:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-22.04, ubuntu-20.04] #ubuntu-latest,]
+      # arch: [arm64, amd64]
+
+        python-version: [3.9,3.11.3] #[3.9,3.11.3,3.12]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python --version
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip list
+          pip install -r requirements.txt
+          echo "Test_under_ubuntuOS run successfully"
+          pip install pytest
+          pytest ./.github/workflows/testing/test_import_libraries.py
+
+  Test_under_windows:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest] # windows-2022, windows-2019]
+      # arch: [arm64, amd64]
+
+        python-version: [3.9,3.11.3] #[3.9,3.11.3,3.12]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Setup Chocolatey
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: -h
+        
+      - name: install Node by Chocolatey
+        shell: bash
+        run: |
+          choco --version
+          choco upgrade chocolatey
+          choco install nodejs
+
+      - name: Install dependencies
+        shell: bash
+        # source .venv/Scripts/activate
+        # .venv/Scripts/activate
+        run: |
+          python --version
+          python -m venv .venv
+          source .venv/Scripts/activate
+          python -m pip install --upgrade pip
+          pip list
+          pip install -r requirements.txt
+          echo "Test_under_windows run successfully"
+          pip install pytest
+          pytest ./.github/workflows/testing/test_import_libraries.py
+        
+
+  test_under_macos:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-11] #,flyci-macos-large-latest-m2] #,macos-13-xlarge,macos-13-large] #, macos-12, macos-13] # [macos-14]not incloded yet 
+        # arch: [arm64, amd64]
+        python-version: [3.9,3.11.3] #[3.9,3.11.3,3.12]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python --version
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip list
+          pip install -r requirements.txt
+          echo "Test_under_macos run successfully"
+          pip install pytest
+          pytest ./.github/workflows/testing/test_import_libraries.py

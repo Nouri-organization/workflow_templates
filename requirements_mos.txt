@@ -1,0 +1,17 @@
+jupyterlab
+jupyterlab-dash
+seaborn
+altair
+ipywidgets
+tensorflow
+plotly
+scikit-learn
+xgboost
+statsmodels
+ipympl
+python-dotenv
+psycopg2-binary
+SQLAlchemy
+ipytest
+pytest
+typer
