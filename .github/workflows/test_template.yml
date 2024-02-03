@@ -5,7 +5,7 @@ on:
     inputs:
       include-MacOS-13:
         description: 'Include macOS-13 variations'
-        required: false
+        required: true
         default: 'false'
         type: choice
         options:
@@ -130,12 +130,13 @@ jobs:
 
   Test_under_more_macos:
     runs-on: ${{ matrix.os }}
+    if: github.event.inputs.include-MacOS-13 == 'true'
     strategy:
       matrix:
         os: [flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
         python-version: [3.9, 3.11.3]
-        include:
-          - include-MacOS-13: 'false'
+        # include:
+        #   - include-MacOS-13: 'true'
 
     steps:
       - name: Checkout code
