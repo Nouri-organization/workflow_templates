@@ -3,8 +3,8 @@ name: Test Dependencies on Different Operating Systems
 on:
   workflow_dispatch:
     inputs:
-      include-MacOS-13:
-        description: 'Include macOS-13 variations'
+      include-MacOS-M1-M2:
+        description: 'Include macOS-(M1-M2)variations'
         required: true
         default: 'false'
         type: choice
@@ -130,7 +130,7 @@ jobs:
 
   Test_under_more_macos:
     runs-on: ${{ matrix.os }}
-    if: github.event.inputs.include-MacOS-13 == 'true'
+    if: github.event.inputs.include-MacOS-M1-M2 == 'true'
     strategy:
       matrix:
         os: [flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
