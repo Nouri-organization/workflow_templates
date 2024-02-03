@@ -3,7 +3,7 @@ name: Test Dependencies on Different Operating Systems
 on:
   workflow_dispatch:
     inputs:
-      include-macos-13:
+      include-MacOS-13:
         description: 'Include macOS-13 variations'
         default: 'false'
         required: false
@@ -93,7 +93,7 @@ jobs:
           pytest ./.github/workflows/testing/test_import_libraries.py
         
 
-  test_under_macos:
+  Test_under_macos:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -123,16 +123,16 @@ jobs:
           pytest ./.github/workflows/testing/test_import_libraries.py
 
 
-  test_under_more_macos:
+  Test_under_more_macos:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
+        os: [ macos-11] #[flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
         python-version: [3.9, 3.11.3]
         include:
-          - include-macos-13: 'true'
+          - include-MacOS-13: 'true'
 
-     steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
