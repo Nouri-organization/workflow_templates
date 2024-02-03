@@ -7,6 +7,11 @@ on:
         description: 'Include macOS-13 variations'
         default: 'false'
         required: false
+        type: choice
+        options:
+        - 'true'
+        - 'false'
+   
   # push:
   #   branches:
   #     - main
@@ -127,7 +132,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-11] #[flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
+        os: [flyci-macos-large-latest-m2, macos-13-xlarge, macos-13-large]
         python-version: [3.9, 3.11.3]
         include:
           - include-MacOS-13: 'true'
