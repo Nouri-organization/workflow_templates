@@ -6,11 +6,11 @@ on:
       external_template:
         description: 'Include external template'
         required: false
-  push:
-    branches:
-      - main
-    # paths:
-    #   - requirements.txt
+  # push:
+  #   branches:
+  #     - main
+  #   # paths:
+  #   #   - requirements.txt
 
 jobs:
   
