@@ -2,13 +2,13 @@ name: Test Dependencies on Different Operating Systems
 
 on:
   workflow_dispatch:
-    # inputs:
-    #   external_template:
-    #     description: 'Include external template'
-    #     required: false
-  # push:
-  #   branches:
-  #     - main
+    inputs:
+      external_template:
+        description: 'Include external template'
+        required: false
+  push:
+    branches:
+      - main
   #   # paths:
   #   #   - requirements.txt
 
